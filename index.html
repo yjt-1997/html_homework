@@ -5,6 +5,313 @@
     <title>HTML</title>
 </head>
 <body>
-
+	<h1>统一建模语言理论测试</h1>
+	<table style="width:800px;">
+	<tr>
+		<td>考试科目：统一建模语言</td>
+		<td>时间：100分钟</td>
+		<td>得分：<input id="score" type="text" readonly="readonly"></td>
+	</tr>
+	<tr>
+		<td>班级：<input id="s-class" type="text"></td>
+		<td>学号：<input id="s-no" type="text"></td>
+		<td>姓名：<input id="s-name" type="text"></td>
+	</tr>
+	</table>
+	<h3>一、填空题（每空5分，共20分）</h3>
+		<h5>1.UML的中文全称是：<input id="text1" type="text"></h5>
+		<h5>2.对象最突出的特征是：<input id="text2" type="text">、<input id="text3" type="text">、<input id="text4" type="text"></h5>
+	<h3>二、选择题（每题10分，共20分）</h3>
+		<h4>1.UML与软件工程的关系是：</h4>
+			<h5><input type="radio" name="select1" value="A">(A).UML就是软件工程</h5>
+			<h5><input type="radio" name="select1" value="B">(B).UML参与到软件工程中软件开发过程的几个阶段</h5>
+			<h5><input type="radio" name="select1" value="C">(C).UML与软件工程无关</h5>
+			<h5><input type="radio" name="select1" value="D">(D).UML是软件工程的一部分</h5>
+		<h4>2.Java语言支持：</h4>
+			<h5><input type="radio" name="select2" value="A">(A).单继承</h5>
+			<h5><input type="radio" name="select2" value="B">(B).多继承</h5>
+			<h5><input type="radio" name="select2" value="C">(C).单继承和多继承都支持</h5>
+			<h5><input type="radio" name="select2" value="D">(D).单继承和多继承都不支持</h5>
+	<h3>三、多选题（每题10分，共20分）</h3>
+		<h4>1.用例的粒度分为以下哪三种：</h4>
+			<h5><input name="check1" type="checkbox" value="A">(A)概述级</h5>
+			<h5><input name="check1" type="checkbox" value="B">(B)需求级</h5>
+			<h5><input name="check1" type="checkbox" value="C">(C)用户目标级</h5>
+			<h5><input name="check1" type="checkbox" value="D">(D)子功能级</h5>
+		<h4>2.类图由以下哪三部分组成：</h4>
+			<h5><input name="check2" type="checkbox" value="A">(A)名称(Name)</h5>
+			<h5><input name="check2" type="checkbox" value="B">(B)属性(Attribute)</h5>
+			<h5><input name="check2" type="checkbox" value="C">(C)操作(Operation)</h5>
+			<h5><input name="check2" type="checkbox" value="D">(D)方法(Function)</h5>
+	<h3>四、判读题（每题10分，共20分）</h3>
+		<h4>1.用例图只是用于和客户交流和沟通的，用于确定需求。
+			<input name="judge1" type="radio" value="right">√<input name="judge1" type="radio" value="wrong">×</h4>
+		<h4>2.在状态图中，终止状态在一个状态图中允许有任意多个。
+			<input name="judge2" type="radio" value="right">√<input name="judge2" type="radio" value="wrong">×</h4>
+	<h3>五、简答题（每题20分，共20分）</h3>
+		<h4>1.简述什么是模型以及模型的表现形式？</h4>
+		<textarea id="answer" style="width: 600px;height: 400px;"></textarea>
+		<br/>
+	<input type="button" value="计算分数" onclick="getScore()">
 </body>
+<script type="text/javascript">
+	//交卷后，禁用所有输入
+function submitAnswer() {
+    var allInput = document.getElementsByTagName('input');
+    for (var i = 0; i < allInput.length; i++) {
+        allInput[i].setAttribute('disabled', 'disabled');
+    }
+}
+
+function getScore() {
+	var sClass = document.getElementById('s-class').value;
+    var sNo = document.getElementById('s-no').value;
+    var sName = document.getElementById('s-name').value;
+    if(!sClass||sClass==''){
+    	return alert('请填写班级');
+    }
+    if(!sNo||sNo==''){
+    	return alert('请填写学号');
+    }
+    if(!sName||sName==''){
+    	return alert('请填写姓名');
+    }
+    //填空题答案
+    var text1 = document.getElementById('text1').value;
+    var text2 = document.getElementById('text2').value;
+    var text3 = document.getElementById('text3').value;
+    var text4 = document.getElementById('text4').value;
+
+    //选择题第一题答案
+    var select1 = document.getElementsByName("select1");
+    var select1Value = null;
+    for (var i = 0; i < select1.length; i++) {
+        if (select1[i].checked == true) {
+            select1Value = select1[i].value;
+            break;
+        }
+    }
+
+    //选择题第二题答案
+    var select2 = document.getElementsByName("select2");
+    var select2Value = null;
+    for (var i = 0; i < select2.length; i++) {
+        if (select2[i].checked == true) {
+            select2Value = select2[i].value;
+            break;
+        }
+    }
+
+    //多选题第一题答案
+    var check1 = document.getElementsByName("check1");
+    var check1Value = new Array(); 
+    for (var i = 0; i < check1.length; i++) {
+        if (check1[i].checked == true) {
+            check1Value.push(check1[i].value);
+        }
+    }
+
+    //多选题第二题答案
+    var check2 = document.getElementsByName("check2");
+    var check2Value = new Array();
+    for (var i = 0; i < check2.length; i++) {
+        if (check2[i].checked == true) {
+            check2Value.push(check2[i].value);
+        }
+    }
+
+    //判断题第一题答案
+    var judge1 = document.getElementsByName("judge1");
+    var judge1Value = null;
+    for (var i = 0; i < judge1.length; i++) {
+        if (judge1[i].checked == true) {
+            judge1Value = judge1[i].value;
+            break;
+        }
+    }
+
+    //判断题第二题答案
+    var judge2 = document.getElementsByName("judge2");
+    var judge2Value = null;
+    for (var i = 0; i < judge2.length; i++) {
+        if (judge2[i].checked == true) {
+            judge2Value = judge2[i].value;
+            break;
+        }
+    }
+
+    //简答题答案
+    var answer = document.getElementById("answer").value;
+    //最后分数
+    var score = 0;
+    //是否确认提交
+    submitFlag = false;
+    //判断第一空得分
+    if (!text1 || text1 == '') {
+        if (!submitFlag) {
+            var flag = confirm('填空第一空还没填，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (text1.trim() == '统一建模语言') score += 5;
+    }
+    //判断第二空得分
+    if (!text2 || text2 == '') {
+        if (!submitFlag) {
+            var flag = confirm('填空第二空还没填，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        var temp = text2.trim();
+        if (temp == '封装性' || temp == '继承性' || temp == '多态性') score += 5;
+    }
+    //判断第三空得分
+    if (!text3 || text3 == '') {
+        if (!submitFlag) {
+            var flag = confirm('填空第三空还没填，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        var temp = text3.trim();
+        //不与前一空相同且为三个答案中的一个
+        if (temp != text2) {
+            if (temp == '封装性' || temp == '继承性' || temp == '多态性') score += 5;
+        }
+    }
+    //判断第四空得分
+    if (!text4 || text4 == '') {
+        if (!submitFlag) {
+            var flag = confirm('填空第四空还没填，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        var temp = text4.trim();
+        //不与前两空相同且为三个答案中的一个
+        if (temp != text2 && temp != text3) {
+            if (temp == '封装性' || temp == '继承性' || temp == '多态性') score += 5;
+        }
+    }
+    //判断选择题第一题得分
+    if (!select1Value || select1Value == '') {
+        if (!submitFlag) {
+            var flag = confirm('选择题第一题还没做，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (select1Value == 'B') score += 10;
+    }
+    //判断选择题第二题得分
+    if (!select2Value || select2Value == '') {
+        if (!submitFlag) {
+            var flag = confirm('选择题第二题还没做，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (select2Value == 'A') score += 10;
+    }
+    //判断多选题第一题得分
+    if (!check1Value || check1Value.length != 3) {
+        if (!submitFlag) {
+            var flag = confirm('多选题第一题还没做或答案数不为3，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (check1Value[0] == 'A' && check1Value[1] == 'B' && check1Value[2] == 'D') score += 10;
+    }
+    //判断多选题第二题得分
+    if (!check2Value || check2Value.length != 3) {
+        if (!submitFlag) {
+            var flag = confirm('多选题第二题还没做或答案数不为3，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (check2Value[0] == 'A' && check2Value[1] == 'B' && check2Value[2] == 'C') score += 10;
+    }
+    //判断判断题第一题得分
+    if (!judge1Value || judge1Value == '') {
+        if (!submitFlag) {
+            var flag = confirm('判断题第一题还没做，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (judge1Value == 'wrong') score += 10;
+    }
+    //判断判断题第二题得分
+    if (!judge2Value || judge2Value == '') {
+        if (!submitFlag) {
+            var flag = confirm('判断题第二题还没做，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (judge2Value == 'right') score += 10;
+    }
+    //判断简答题得分
+    if (!answer || answer == '') {
+        if (!submitFlag) {
+            var flag = confirm('简答题还没做，确认交卷吗？');
+            if (flag) {
+                submitAnswer();
+                submitFlag = true;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (answer.trim() == '模型是对现实世界的简化和抽象，模型是对所研究的系统、过程、事务或概念的一种表达形式；可以是某种图形；或者是一种数学表达式。') score += 20;
+    }
+    document.getElementById("score").value = score;
+    submitAnswer();
+    return alert('考试已结束，您的得分是' + score + '分');
+}
+</script>
 </html>
